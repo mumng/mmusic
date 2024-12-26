@@ -24,59 +24,70 @@ class MusicPlayScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.purpleAccent,
         elevation: 4.0,
         title: Text(
           "mMusic Player",
           style: TextStyle(fontWeight: FontWeight.bold, color:Colors.white),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Center(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.purple, Colors.purpleAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          )
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/images/mmusic.webp'),
+              radius: 100,
+            ),
+            SizedBox(height: 20),
+            Text(
+                "Song Title",
+                style:TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                ),
+            ),
+            SizedBox(height:5),
+            Text(
+                "Artist Name",
+                style:TextStyle(
+                  fontSize: 18,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.white54
+                )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 200,
-                    width:200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/mmusic.webp'),
-                        fit: BoxFit.cover,),
-                    ),
+                  Slider(
+                    value: 0.5,
+                    onChanged: (value) {},
+                    activeColor: Colors.white,
+                    inactiveColor: Colors.grey,
                   ),
-                  SizedBox(height: 20),
-                  Text("Song Title", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  SizedBox(height:5),
-                  Text("Artist Name", style:TextStyle(fontSize: 15, fontStyle: FontStyle.italic))
-                ]
+                  SizedBox(height:10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(onPressed: () {}, icon: Icon(Icons.fast_rewind), iconSize:35,),
+                      IconButton(onPressed: () {}, icon: Icon(Icons.play_arrow), iconSize:35),
+                      IconButton(onPressed: () {}, icon: Icon(Icons.skip_next), iconSize:35),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
-            child: Column(
-              children: [
-                Slider(
-                  value: 0.5,
-                  onChanged: (value) {},
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(onPressed: () {}, icon: Icon(Icons.skip_previous)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.play_arrow)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.skip_next)),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
